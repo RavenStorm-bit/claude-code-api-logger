@@ -33,7 +33,7 @@ The `fetchWithTimeout` function in `cli.js` has been enhanced to log all API int
 
 ### Log Location
 
-All API interactions are logged to `/root/claude-api.log` in JSON format.
+All API interactions are logged to `claude-api.log` in the current working directory in JSON format.
 
 ## Usage
 
@@ -43,23 +43,23 @@ Run the modified Claude Code CLI normally:
 node cli.js -p "your prompt here"
 ```
 
-All API calls will be automatically logged to `/root/claude-api.log`.
+All API calls will be automatically logged to `claude-api.log` in the current directory.
 
 ## Log Analysis
 
 View recent API calls:
 ```bash
-tail -5 /root/claude-api.log | jq -r '.url + " " + .type + " " + (.timestamp | split("T")[1] | split(".")[0])'
+tail -5 claude-api.log | jq -r '.url + " " + .type + " " + (.timestamp | split("T")[1] | split(".")[0])'
 ```
 
 View request details:
 ```bash
-grep '"type":"REQUEST"' /root/claude-api.log | jq .
+grep '"type":"REQUEST"' claude-api.log | jq .
 ```
 
 View response details:
 ```bash
-grep '"type":"RESPONSE"' /root/claude-api.log | jq .
+grep '"type":"RESPONSE"' claude-api.log | jq .
 ```
 
 ## Security Note
